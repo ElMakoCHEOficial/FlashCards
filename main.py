@@ -24,13 +24,25 @@ fs=32
 tfs=30
 font="Times New Roman"
 def next_card():
-    global current_card, flip_timer
-    window.after_cancel(flip_timer)
-    current_card = random.choice(to_learn)
-    canvas.itemconfig(card_title, text=from_, fill="black")
-    canvas.itemconfig(card_word, text=current_card[from_], fill="black")
-    canvas.itemconfig(card_background, image=card_front_img)
-    flip_timer = window.after(mem_time, func=flip_card)
+    global to_learn, current_card, flip_timer
+    if len(to_learn) > 0:
+        window.after_cancel(flip_timer)
+        current_card = random.choice(to_learn)
+        canvas.itemconfig(card_title, text=from_, fill="black")
+        canvas.itemconfig(card_word, text=current_card[from_], fill="black")
+        canvas.itemconfig(card_background, image=card_front_img)
+        flip_timer = window.after(mem_time, func=flip_card)
+    else:
+        print("Ganaste / You won / Tu as gagné")
+        player = input("Name: ")
+        canvas.itemconfig(card_title, text="The End", fill="white")
+        canvas.itemconfig(card_word, text="I see the player you mean\n" + str(player), fill="white")
+        canvas.itemconfig(card_background, image=card_back_img)        
+        original_data = pandas.read_csv("data/french_words.csv", encoding=mode_)
+        to_learn = original_data.to_dict(orient="records")
+        data = pandas.DataFrame(to_learn)
+        data.to_csv("data/words_to_learn.csv", index=False, encoding=mode_)
+        window.after(2000, next_card)
 def flip_card():
     canvas.itemconfig(card_title, text=to_, fill="white")
     canvas.itemconfig(card_word, text=current_card[to_], fill="white")
@@ -63,5 +75,4 @@ known_button = Button(image=check_image, highlightthickness=0, command=is_known)
 known_button.grid(row=1, column=1)
 next_card()
 window.mainloop()
-
 print(len(to_learn))
