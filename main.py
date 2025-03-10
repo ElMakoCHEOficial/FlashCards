@@ -9,7 +9,7 @@ LangDict={"0":"English","1":"Spanish","2":"French","3":"Italian",
           "4":"Portuguese","5":"Greek","6":"German","7":"Norwegian",
           "8":"Dutch","9":"Finnish","10":"Swedish"}
 languages="English,Spanish,French,Italian,Portuguese,Greek,German,Norwegian,Dutch,Finnish,Swedish"
-# ,Estonian,Croatian,Irish,Polish,Russian,Ukrainian,Hindi,Armenian,Japanese,Korean,Chinese,Arabic
+#Estonian,Croatian,Irish,Polish,Russian,Ukrainian,Hindi,Armenian,Japanese,Korean,Chinese,Arabic
 LangList=languages.split(",")
 font="Times New Roman"
 mode_="ISO-8859-1"
