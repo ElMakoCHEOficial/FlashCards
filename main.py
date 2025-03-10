@@ -17,6 +17,7 @@ try:
 except FileNotFoundError:
     original_data = pandas.read_csv("data/french_words.csv", encoding=mode_)
     W_to_learn = original_data.to_dict(orient="records")
+    # print("Initializing...")
 else:
     W_to_learn = data.to_dict(orient="records")
 from_=LangList[2] # whatever
@@ -76,4 +77,3 @@ known_button = Button(image=check_image, highlightthickness=0, command=is_known)
 known_button.grid(row=1, column=1)
 next_card()
 window.mainloop()
-print(len(W_to_learn))
