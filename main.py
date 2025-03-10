@@ -14,7 +14,7 @@ LangList=languages.split(",")
 font="Times New Roman"
 mode_="ISO-8859-1"
 fontSize=28
-titleFontSize=25
+titleFontSize=32
 randomC=False
 try:
     data = pandas.read_csv("data/words_to_learn.csv", encoding=mode_)
