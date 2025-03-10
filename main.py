@@ -5,7 +5,9 @@ backgColor = "#B1DDC5"
 curr_card = {}
 W_to_learn = {}
 mem_time=3000
-LangDict={"0":"English","1":"Spanish",}
+LangDict={"0":"English","1":"Spanish","2":"French","3":"Italian",
+          "4":"Portuguese","5":"Greek","6":"German","7":"Norwegian","8":"Dutch",
+          "9":"Finnish","9":"Swedish"}
 languages="English,Spanish,French,Italian,Portuguese,Greek,German,Norwegian,Dutch,Finnish,Swedish"
 # ,Estonian,Croatian,Irish,Polish,Russian,Ukrainian,Hindi,Armenian,Japanese,Korean,Chinese,Arabic
 LangList=languages.split(",")
@@ -36,6 +38,7 @@ def next_card():
         curr_card = random.choice(W_to_learn)
         canvas.itemconfig(card_title, text=from_, fill="black")
         canvas.itemconfig(card_word, text=curr_card[from_], fill="black")
+        canvas.itemconfig(leftWordsLabel, fill="black")
         canvas.itemconfig(card_background, image=card_front_img)
         canvas.itemconfig(leftWordsLabel, text=f"Left: {len(W_to_learn)}")        
         flip_timer = window.after(mem_time, func=flip_card)
@@ -43,7 +46,7 @@ def next_card():
         print("Ganaste / You won / Tu as gagné")
         # player = input("Name: ")
         canvas.itemconfig(card_title, text="The End", fill="white")
-        canvas.itemconfig(card_word, text="I see the player you mean\n", fill="white")
+        canvas.itemconfig(card_word, text="I see the player you mean\n", fill="white")        
         canvas.itemconfig(card_background, image=card_back_img)        
         original_data = pandas.read_csv("data/french_words.csv", encoding=mode_)
         W_to_learn = original_data.to_dict(orient="records")
@@ -53,6 +56,7 @@ def next_card():
 def flip_card():
     canvas.itemconfig(card_title, text=to_, fill="white")
     canvas.itemconfig(card_word, text=curr_card[to_], fill="white")
+    canvas.itemconfig(leftWordsLabel, fill="white")
     canvas.itemconfig(card_background, image=card_back_img)
 def is_known():
     W_to_learn.remove(curr_card)
@@ -69,7 +73,7 @@ card_back_img = PhotoImage(file="images/card_back.png")
 card_background = canvas.create_image(400, 263, image=card_front_img)
 card_title = canvas.create_text(400, 150, text="", font=(font, titleFontSize, "italic"))
 card_word = canvas.create_text(400, 263, text="", font=(font, fontSize, "bold"))
-leftWordsLabel = canvas.create_text(600, 463, text=f"Left: {len(W_to_learn)}", font=(font, fontSize, "bold"))
+leftWordsLabel = canvas.create_text(620, 463, text=f"Left: {len(W_to_learn)}", font=(font, fontSize, "bold"))
 canvas.config(bg=backgColor, highlightthickness=0)
 canvas.grid(row=0, column=0, columnspan=2)
 cross_image = PhotoImage(file="images/wrong.png")
