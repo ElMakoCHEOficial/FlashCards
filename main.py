@@ -4,7 +4,7 @@ import random
 backgColor = "#B1DDC5"
 curr_card = {}
 W_to_learn = {}
-mem_time=3000
+mem_time=3_000
 LangDict={"0":"English","1":"Spanish","2":"French","3":"Italian",
           "4":"Portuguese","5":"Greek","6":"German","7":"Norwegian","8":"Dutch",
           "9":"Finnish","9":"Swedish"}
@@ -13,8 +13,8 @@ languages="English,Spanish,French,Italian,Portuguese,Greek,German,Norwegian,Dutc
 LangList=languages.split(",")
 font="Times New Roman"
 mode_="ISO-8859-1"
-fontSize=32
-titleFontSize=30
+fontSize=28
+titleFontSize=25
 randomC=False
 try:
     data = pandas.read_csv("data/words_to_learn.csv", encoding=mode_)
