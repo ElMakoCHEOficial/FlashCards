@@ -5,13 +5,15 @@ backgColor = "#B1DDC5"
 curr_card = {}
 W_to_learn = {}
 mem_time=3000
-text="English,Spanish,French,Italian,Portuguese,Greek,German,Norwegian,Dutch,Finnish,Swedish,Estonian,Croatian,Irish,Polish,Russian,Ukrainian,Hindi,Armenian,Japanese,Korean,Chinese,Arabic"
-LangList=text.split(",")
-# print(LL)
+LangDict={"0":"English","1":"Spanish",}
+languages="English,Spanish,French,Italian,Portuguese,Greek,German,Norwegian,Dutch,Finnish,Swedish"
+# ,Estonian,Croatian,Irish,Polish,Russian,Ukrainian,Hindi,Armenian,Japanese,Korean,Chinese,Arabic
+LangList=languages.split(",")
 font="Times New Roman"
 mode_="ISO-8859-1"
 fontSize=32
 titleFontSize=30
+randomC=False
 try:
     data = pandas.read_csv("data/words_to_learn.csv", encoding=mode_)
 except FileNotFoundError:
@@ -20,9 +22,13 @@ except FileNotFoundError:
     # print("Initializing...")
 else:
     W_to_learn = data.to_dict(orient="records")
-from_=LangList[2] # whatever
-to_=LangList[1] # spanski/ anglais
-# from_=random.choice(LL)  # Random     
+from_=LangList[2] # From lang
+to_=LangList[1] # To lang
+from_=LangDict["0"]
+to_=LangDict["1"]
+
+if (randomC):# Random lang
+    from_=random.choice(LangList)       
 def next_card():
     global W_to_learn, curr_card, flip_timer
     if len(W_to_learn) > 0:
@@ -52,10 +58,7 @@ def is_known():
     W_to_learn.remove(curr_card)
     data = pandas.DataFrame(W_to_learn)
     data.to_csv("data/words_to_learn.csv", index=False,encoding=mode_)
-    # data = pandas.DataFrame(to_learn)
-    # data.to_csv("data/words_to_learn.csv", index=False,encoding=mode_)
     next_card()
-
 window = Tk()
 window.title("Languages Flash Card Game")  
 window.config(padx=50, pady=50, bg=backgColor)
