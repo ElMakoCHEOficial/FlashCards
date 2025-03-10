@@ -42,7 +42,7 @@ def next_card():
         W_to_learn = original_data.to_dict(orient="records")
         data = pandas.DataFrame(W_to_learn)
         data.to_csv("data/words_to_learn.csv", index=False, encoding=mode_)
-        window.after(2000, next_card)
+        window.after(20000, next_card)
 def flip_card():
     canvas.itemconfig(card_title, text=to_, fill="white")
     canvas.itemconfig(card_word, text=curr_card[to_], fill="white")
